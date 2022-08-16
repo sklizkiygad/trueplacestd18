@@ -1544,11 +1544,12 @@ P.getState = function () {
     if (!this.hiddenForm) {
         var e = $(document.getElementsByTagName("body")[0]),
             t = '<input name="isPrelandingPage" value="1" type="hidden">', r = this;
-        r.maingeoform.isPrelandingPage || (t = ""),
+            r.maingeoform.isPrelandingPage || (t = ""),
             r.hiddenForm = $('<form action="/switchlocation" method="POST">' + t + '\t<input name="iCity" type="hidden">\t<input name="iCategoryId" type="hidden">\t<input name="iCountry" type="hidden">\t<input name="iStreet" type="hidden">\t<input name="iHome" type="hidden">\t<input name="iLat" type="hidden">\t<input name="iLon" type="hidden">\t<input name="_token" type="hidden">\t<input type="submit" style="display:none;">\t'),
             e.append(this.hiddenForm),
             r.hiddenForm = this.hiddenForm[0]
     }
+
 }, P.onInitCoordinatesLoaded = function () {
 
     if (this._reinitEmptyCoordinatesProcess) {
@@ -1793,8 +1794,11 @@ P.isAllowCity = function(s, nCityId) {
 , P.provideInterface = function (e) {
     return 1 === this._interfaces[e]
 }, P.setCity = function (e, t) {
+
     this._setCity(e, t)
 }, P._setCity = function (e, t, r) {
+
+
 
     var i, a, o = this;
     i = r ? r : o.HTML_CITIES_LIST_ID, a = $(i)[0], a && o.Lib.selectByText(a, e)
@@ -1805,6 +1809,7 @@ P.isAllowCity = function(s, nCityId) {
 }, P.getCitiesList = function (e) {
     return r._getCitiesList(e)
 }, P._getCitiesList = function (e) {
+
     var t, r, i, a, o = this, n = [];
     if (t = e ? e : o.HTML_CITIES_LIST_ID, r = $(t)[0]) for (a = 0; a < r.options.length; a++) i = r.options[a], n.push([i.value, i.text]);
     return n
@@ -1866,7 +1871,9 @@ P.isAllowCity = function(s, nCityId) {
 var P = Flipcat.CMapModalDialog.prototype;
 P.update = function () {
     var e = this;
-    e.isGuiFound() && (e.setAddressString(e.subject._getAddressString(), e.needMoveMarkerOnCreate), e.needMoveMarkerOnCreate = !1)
+    e.isGuiFound() && (e.setAddressString(e.subject._getAddressString(),
+        e.needMoveMarkerOnCreate),
+        e.needMoveMarkerOnCreate = !1)
     //e.isGuiFound() && (e.setAddressString(e.subject.sAddressString, e.needMoveMarkerOnCreate), e.needMoveMarkerOnCreate = !1)
 }, P.provideInterface = function (e) {
     return 1 === this._interfaces[e]
@@ -1888,11 +1895,10 @@ P.update = function () {
         /*поменял функцию*/
     },500)
 
-
-
     var e=this;
-    e.setAddressString(e.getAddressString(), !0)
+    e.setAddressString(e.getAddressString(), !0);
 }, P.setAddressString = function(s, setMarkerOnCart) {
+
     var o = this;
     if (!o.isGuiFound()) {
         return;
@@ -2912,11 +2918,6 @@ var Messages = Flipcat.Messages = {
     }
 };
 
-
-
-
-
-
 Flipcat.MainGeoForm = function (e) {
     this.subject = e,
         this._interfaces = {IMainGeoForm: 1},
@@ -2929,10 +2930,12 @@ Flipcat.MainGeoForm = function (e) {
         this.HTML_FIND_BUTTON_ID = "#findLocation",
         this.HTML_FORM_ID = "#setLocationForm",
         this._initSelectWithoutAddressMode(),
-        this._initSelectAndAddressMode(), Flipcat.MainGeoForm.superclass.__construct.call(this, e)
+        this._initSelectAndAddressMode(),
+        Flipcat.MainGeoForm.superclass.__construct.call(this, e)
 }, extend(Flipcat.CMainGeoForm, Flipcat.MainGeoForm);
 var P = Flipcat.CMainGeoForm.prototype;
 P.setCity = function (e, t) {
+
     var r = this, i = r._getFormViewMode();
     switch (i) {
         case r.VIEW_MODE_READONLY:
@@ -3031,12 +3034,23 @@ P.setCity = function (e, t) {
 }, P._initSelectAndAddressMode = function () {
     var e, t, r, i, a = this, o = a._getFormViewMode();
     o == a.VIEW_MODE_SELECT_AND_ADDRESS && (e = $("#dropdownMenu1"), e.bind("change", function (e) {
-        r = e.target.value, t = a.Lib.getSelectedText(e.target), a.setStreet(""), a.setNumber(""), i = a.subject, i.setState("", i.sCountry, a.getCity(), "", ""), i.notify(), i.onCityInListChange(t, r)
+        r = e.target.value,
+            t = a.Lib.getSelectedText(e.target),
+            a.setStreet(""),
+            a.setNumber(""),
+            i = a.subject,
+            i.setState("", i.sCountry, a.getCity(), "", ""),
+            i.notify(),
+            i.onCityInListChange(t, r)
     }))
 }, P._getCitiesListForReadonlyModeWithCitylevel = function () {
     return this._getCitiesList("#dropdownMenu1")
 }, Flipcat.LeftMenuCitySwitcher = function (e) {
-    this.subject = e, this._interfaces = {IMainGeoForm: 1}, this.HTML_CITIES_LIST_ID = "#mleftSideCitySelect", this._initSelect(), Flipcat.LeftMenuCitySwitcher.superclass.__construct.call(this, e)
+    this.subject = e,
+        this._interfaces = {IMainGeoForm: 1},
+        this.HTML_CITIES_LIST_ID = "#mleftSideCitySelect",
+        this._initSelect(),
+        Flipcat.LeftMenuCitySwitcher.superclass.__construct.call(this, e)
 }, extend(Flipcat.CMainGeoForm, Flipcat.LeftMenuCitySwitcher);
 var P = Flipcat.LeftMenuCitySwitcher.prototype;
 P.initSubmitAction = function (e, t) {
@@ -3046,27 +3060,50 @@ P.initSubmitAction = function (e, t) {
         t = i.target.value, e = r.Lib.getSelectedText(i.target), r.subject.onCityInListChange(e, t)
     })
 }, Flipcat.FirstRunPopupCitySwitcher = function (e) {
-    this.verbose = !1, this.subject = e, this._interfaces = {IMainGeoForm: 1}, this.HTML_CITIES_LIST_ID = "#mCityId", this.HTML_POPUP_CITY_SELECT_MODAL_ID = "#cityModal", Flipcat.Desktop.isMobile() && $(this.HTML_POPUP_CITY_SELECT_MODAL_ID).modal("show"), this.HTML_FORM_ID = "#mSelectCityForm", this.HTML_FORM_BTN_ID = "#mConfirmCity", this.initForm(), this._initSelect(), Flipcat.FirstRunPopupCitySwitcher.superclass.__construct.call(this, e)
+    this.verbose = !1,
+        this.subject = e,
+        this._interfaces = {IMainGeoForm: 1},
+        this.HTML_CITIES_LIST_ID = "#mCityId",
+        this.HTML_POPUP_CITY_SELECT_MODAL_ID = "#cityModal",
+    Flipcat.Desktop.isMobile() && $(this.HTML_POPUP_CITY_SELECT_MODAL_ID).modal("show"),
+        this.HTML_FORM_ID = "#mSelectCityForm",
+        this.HTML_FORM_BTN_ID = "#mFindLocation",
+        this.initForm(),
+        this._initSelect(),
+        Flipcat.FirstRunPopupCitySwitcher.superclass.__construct.call(this, e)
 }, extend(Flipcat.CMainGeoForm, Flipcat.FirstRunPopupCitySwitcher);
 var P = Flipcat.FirstRunPopupCitySwitcher.prototype;
 P.initForm = function () {
     var e, t = this, r = $(t.HTML_CITIES_LIST_ID)[0];
     $(t.HTML_FORM_BTN_ID).click(function (i) {
-        e = FlipcatWebAppLibrary.getSelectedText(r), e && (t.subject.sCity = e, isset(t.subject, "geodecoder", "_geodecoder", "sCity") && (t.subject.geodecoder._geodecoder.sCity = e)), $(t.HTML_FORM_ID).submit()
+
+        //console.log($('#mLocationFormCitySelect option:selected')[0].innerHTML);
+        console.log(FlipcatWebAppLibrary.getSelectedText(r));
+
+          //e = FlipcatWebAppLibrary.getSelectedText(r),
+        e=$('#mLocationFormCitySelect option:selected')[0].innerHTML,
+          e && (t.subject.sCity = e, isset(t.subject, "geodecoder", "_geodecoder", "sCity") && (t.subject.geodecoder._geodecoder.sCity = e)),
+              $(t.HTML_FORM_ID).submit()
+
     })
+
+
+
 }, P._initSelect = function () {
+
     var e, t, r = this;
     $(r.HTML_CITIES_LIST_ID).bind("change", function (i) {
         t = i.target.value, e = r.Lib.getSelectedText(i.target), r.subject.setState("", r.subject.sCountry, e, r.getStreet(), r.getNumber())
     })
 }, Flipcat.MobileGeoForm = function (e) {
+
     this.subject = e,
         this._interfaces = {IMainGeoForm: 1},
         this.HTML_CITIES_LIST_ID = "#mLocationFormCitySelect",
         this.HTML_POPUP_CITY_SELECT_MODAL_ID = "#cityModal",
     Flipcat.Desktop.isMobile() && $(this.HTML_POPUP_CITY_SELECT_MODAL_ID).modal("show"),
         this.HTML_FORM_ID = "#geo",
-        this.HTML_FORM_BTN_ID = "#mLocationFormCitySelect",
+        this.HTML_FORM_BTN_ID = "#mConfirmCity",
         this.HTML_STREET_INPUT_ID = "#mIStreet",
         this.HTML_HOME_INPUT_ID = "#mIHome",
         this.HTML_LEFT_SELECT_ID = "#mleftSideCitySelect",
@@ -3123,7 +3160,8 @@ P.open = function (e) {
     } else $("#map-modal").addClass("show").removeClass("hide"), $(".modal-backdrop.fade.hide").addClass("show").removeClass("hide"), $(document.getElementsByTagName("body")[0]).addClass("modal-open")
 }, P.getAddressString = function () {
     var e = this;
-    return e.isGuiFound() && (e.iAddress.val() || $("#dropdownMenu1 option:selected" ).text())
+    console.log($("#iStreet").val()+', '+$("#iHome").val());
+    return e.isGuiFound() && (e.iAddress.val() || ($("#dropdownMenu1 option:selected").text()+ ', ' +$("#iStreet").val()+ ', ' +$("#iHome").val()))
 }, P.isGuiFound = function () {
     return this._isGuiFound
 }, P.getSelectOnMapBtnId = function () {
